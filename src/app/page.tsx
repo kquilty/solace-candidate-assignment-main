@@ -28,9 +28,9 @@ export default function Home() {
         // Filter advocates based on search term
         let lowerSearchTerm = searchTerm.toLowerCase();
         const filteredAdvocates = advocates.filter((advocate: Advocate) => {
+            let fullName = advocate.firstName + " " + advocate.lastName;
             return (
-                advocate.firstName.toLowerCase().includes(lowerSearchTerm) ||
-                advocate.lastName.toLowerCase().includes(lowerSearchTerm) ||
+                fullName.toLowerCase().includes(lowerSearchTerm) ||
                 advocate.city.toLowerCase().includes(lowerSearchTerm) ||
                 advocate.degree.toLowerCase().includes(lowerSearchTerm) ||
                 advocate.specialties.some((s) => s.toLowerCase().includes(lowerSearchTerm)) ||
@@ -53,14 +53,12 @@ export default function Home() {
 
     return (
         <main style={{ margin: "24px" }}>
-            <h1>Solace Advocates</h1>
-            <br />
-            <br />
+            <h1 className="title">Solace Advocates</h1>
             <div>
                 <input 
                     id="search-input" 
                     placeholder="Search..."
-                    style={{ border: "1px solid black" }} 
+                    className="search-input"
                     value={filterValue}
                     onChange={onFilterTextChange} 
                     />
@@ -83,11 +81,10 @@ export default function Home() {
             <table className="results-table">
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Full Name</th>
                         <th>City</th>
                         <th>Degree</th>
-                        <th>Specialties</th>
+                        <th style={{ textAlign: 'left' }}>Specialties</th>
                         <th>Years of Experience</th>
                         <th>Phone Number</th>
                     </tr>
@@ -96,17 +93,16 @@ export default function Home() {
                     {filteredAdvocates.map((advocate: Advocate) => {
                         return (
                             <tr key={advocate.firstName + advocate.lastName + advocate.phoneNumber}>
-                                <td>{advocate.firstName}</td>
-                                <td>{advocate.lastName}</td>
+                                <td>{advocate.firstName} {advocate.lastName}</td>
                                 <td>{advocate.city}</td>
                                 <td>{advocate.degree}</td>
-                                <td>
+                                <td style={{ textAlign: 'left' }}>
                                     {advocate.specialties.map((s: string) => (
                                         <div key={s}>{s}</div>
                                     ))}
                                 </td>
                                 <td>{advocate.yearsOfExperience}</td>
-                                <td>{advocate.phoneNumber}</td>
+                                <td>{formatPhoneNumber(advocate.phoneNumber)}</td>
                             </tr>
                         );
                     })}
@@ -114,6 +110,11 @@ export default function Home() {
             </table>
         </main>
     );
+
+    function formatPhoneNumber(phoneNumber: number): string {
+        const phoneString = phoneNumber.toString();
+        return `(${phoneString.slice(0, 3)}) ${phoneString.slice(3, 6)}-${phoneString.slice(6)}`;
+    }
 }
 
 interface Advocate {

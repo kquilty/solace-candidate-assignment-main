@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
 .results-table {
   width: 100%;
   border-collapse: collapse;
@@ -9,9 +14,9 @@
 }
 .results-table th,
 .results-table td {
-  border: 1px solid black;
+  border: 1px solid rgb(214, 214, 214);
   padding: 8px;
-  text-align: left;
+  text-align: center;
 }
 .results-table th {
   background-color: #f2f2f2;
