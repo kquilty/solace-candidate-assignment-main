@@ -57,21 +57,24 @@ export default function Home() {
             <br />
             <br />
             <div>
-                <p>Search</p>
-                <p>
-                    Searching for: {filterValue}
-                </p>
                 <input 
                     id="search-input" 
+                    placeholder="Search..."
                     style={{ border: "1px solid black" }} 
                     value={filterValue}
                     onChange={onFilterTextChange} 
                     />
-                <button onClick={onResetSearchClick}>Reset Search</button>
+                <button 
+                    id="reset-search-button"
+                    onClick={onResetSearchClick}
+                    >Reset Search</button>
+                <p>
+                    Searching for: {filterValue}
+                </p>
             </div>
             <br />
             <br />
-            <table>
+            <table className="results-table">
                 <thead>
                     <tr>
                         <th>First Name</th>
