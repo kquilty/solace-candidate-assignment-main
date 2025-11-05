@@ -82,7 +82,7 @@ export default function Home() {
                 <tbody>
                     {filteredAdvocates.map((advocate: Advocate) => {
                         return (
-                            <tr key={advocate.id}>
+                            <tr key={advocate.firstName + advocate.lastName + advocate.phoneNumber}>
                                 <td>{advocate.firstName}</td>
                                 <td>{advocate.lastName}</td>
                                 <td>{advocate.city}</td>
@@ -104,7 +104,7 @@ export default function Home() {
 }
 
 interface Advocate {
-    id: string;
+    // id: string; <--- ID is not available yet (via the API).
     firstName: string;
     lastName: string;
     city: string;
