@@ -64,16 +64,22 @@ export default function Home() {
                     value={filterValue}
                     onChange={onFilterTextChange} 
                     />
-                <button 
-                    id="reset-search-button"
-                    onClick={onResetSearchClick}
-                    >Reset Search</button>
-                <p>
-                    Searching for: {filterValue}
-                </p>
+
+                <div style={{ display: filterValue ? 'block' : 'none' }}>
+                    Searching for:
+                    <span className="search-pill">
+                        <strong>{filterValue}</strong> 
+                        <button 
+                            id="reset-search-button"
+                            onClick={onResetSearchClick}
+                            title="Clear Search"
+                            >x</button>
+                    </span>
+                </div>
+
+
             </div>
-            <br />
-            <br />
+            
             <table className="results-table">
                 <thead>
                     <tr>
