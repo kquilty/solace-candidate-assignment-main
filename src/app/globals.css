@@ -11,12 +11,13 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
+  max-width: 1500px;
 }
 .results-table th,
 .results-table td {
   border: 1px solid rgb(214, 214, 214);
   padding: 8px;
-  text-align: center;
+  text-align: left;
 }
 .results-table th {
   background-color: #f2f2f2;

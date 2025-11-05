@@ -84,25 +84,32 @@ export default function Home() {
                         <th>Full Name</th>
                         <th>City</th>
                         <th>Degree</th>
-                        <th style={{ textAlign: 'left' }}>Specialties</th>
-                        <th>Years of Experience</th>
-                        <th>Phone Number</th>
+                        <th>Specialties</th>
+                        <th style={{ textAlign: 'center' }}>Years of Experience</th>
+                        <th style={{ textAlign: 'center' }}>Phone Number</th>
                     </tr>
                 </thead>
                 <tbody>
                     {filteredAdvocates.map((advocate: Advocate) => {
                         return (
                             <tr key={advocate.firstName + advocate.lastName + advocate.phoneNumber}>
-                                <td>{advocate.firstName} {advocate.lastName}</td>
-                                <td>{advocate.city}</td>
+                                <td style={{whiteSpace: 'nowrap'}}>{advocate.firstName} {advocate.lastName}</td>
+                                <td style={{whiteSpace: 'nowrap'}}>{advocate.city}</td>
                                 <td>{advocate.degree}</td>
                                 <td style={{ textAlign: 'left' }}>
-                                    {advocate.specialties.map((s: string) => (
-                                        <div key={s}>{s}</div>
-                                    ))}
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                                        {advocate.specialties.map((specialtyName: string) => (
+                                            <span key={specialtyName} style={{ 
+                                                backgroundColor: '#e0e0e0', 
+                                                padding: '2px 6px', 
+                                                borderRadius: '4px', 
+                                                fontSize: '12px' 
+                                            }}>{specialtyName}</span>
+                                        ))}
+                                    </div>
                                 </td>
-                                <td>{advocate.yearsOfExperience}</td>
-                                <td>{formatPhoneNumber(advocate.phoneNumber)}</td>
+                                <td style={{ textAlign: 'center' }}>{advocate.yearsOfExperience}</td>
+                                <td style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>{formatPhoneNumber(advocate.phoneNumber)}</td>
                             </tr>
                         );
                     })}
