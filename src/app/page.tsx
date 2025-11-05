@@ -5,7 +5,10 @@ import { useEffect, useState } from "react";
 export default function Home() {
     const [advocates, setAdvocates] = useState([]);
     const [filteredAdvocates, setFilteredAdvocates] = useState([]);
+    const [filterValue, setFilterValue] = useState(''); 
 
+
+    // On load...
     useEffect(() => {
         console.log("fetching advocates...");
         fetch("/api/advocates").then((response) => {
@@ -16,10 +19,11 @@ export default function Home() {
         });
     }, []);
 
-    const onChange = (e) => {
+
+    const onFilterTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const searchTerm = e.target.value;
 
-        document.getElementById("search-term")!.innerHTML = searchTerm;
+        setFilterValue(searchTerm);
 
         // Filter advocates based on search term
         let lowerSearchTerm = searchTerm.toLowerCase();
@@ -51,9 +55,14 @@ export default function Home() {
             <div>
                 <p>Search</p>
                 <p>
-                    Searching for: <span id="search-term"></span>
+                    Searching for: {filterValue}
                 </p>
-                <input style={{ border: "1px solid black" }} onChange={onChange} />
+                <input 
+                    id="search-input" 
+                    style={{ border: "1px solid black" }} 
+                    value={filterValue}
+                    onChange={onFilterTextChange} 
+                    />
                 <button onClick={onClick}>Reset Search</button>
             </div>
             <br />
