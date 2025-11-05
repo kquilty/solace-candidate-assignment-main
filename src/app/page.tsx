@@ -22,14 +22,15 @@ export default function Home() {
         document.getElementById("search-term")!.innerHTML = searchTerm;
 
         console.log("filtering advocates...");
-        const filteredAdvocates = advocates.filter((advocate) => {
+        const filteredAdvocates = advocates.filter((advocate: Advocate) => {
             return (
                 advocate.firstName.includes(searchTerm) ||
                 advocate.lastName.includes(searchTerm) ||
                 advocate.city.includes(searchTerm) ||
                 advocate.degree.includes(searchTerm) ||
                 advocate.specialties.includes(searchTerm) ||
-                advocate.yearsOfExperience.includes(searchTerm)
+                advocate.yearsOfExperience.toString().includes(searchTerm)
+                // || advocate.phoneNumber.toString().includes(searchTerm) <--- not matching on phone for now
             );
         });
 
@@ -69,7 +70,7 @@ export default function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredAdvocates.map((advocate) => {
+                    {filteredAdvocates.map((advocate: Advocate) => {
                         return (
                             <tr key={advocate.id}>
                                 <td>{advocate.firstName}</td>
@@ -90,4 +91,15 @@ export default function Home() {
             </table>
         </main>
     );
+}
+
+interface Advocate {
+    id: string;
+    firstName: string;
+    lastName: string;
+    city: string;
+    degree: string;
+    specialties: string[];
+    yearsOfExperience: number;
+    phoneNumber: number;
 }
