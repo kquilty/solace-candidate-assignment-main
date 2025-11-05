@@ -42,9 +42,13 @@ export default function Home() {
         setFilteredAdvocates(filteredAdvocates);
     };
 
-    const onClick = () => {
+    const onResetSearchClick = () => {
         console.log(advocates);
         setFilteredAdvocates(advocates);
+
+        // Reset the input (and refocus it)
+        setFilterValue('');
+        (document.getElementById("search-input") as HTMLInputElement).focus();
     };
 
     return (
@@ -63,7 +67,7 @@ export default function Home() {
                     value={filterValue}
                     onChange={onFilterTextChange} 
                     />
-                <button onClick={onClick}>Reset Search</button>
+                <button onClick={onResetSearchClick}>Reset Search</button>
             </div>
             <br />
             <br />
