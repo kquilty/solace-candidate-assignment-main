@@ -10,7 +10,6 @@ export default function Home() {
 
     // On load...
     useEffect(() => {
-        console.log("fetching advocates...");
         fetch("/api/advocates").then((response) => {
             response.json().then((jsonResponse) => {
                 setAdvocates(jsonResponse.data);
@@ -43,7 +42,6 @@ export default function Home() {
     };
 
     const onResetSearchClick = () => {
-        console.log(advocates);
         setFilteredAdvocates(advocates);
 
         // Reset the input (and refocus it)
@@ -74,8 +72,6 @@ export default function Home() {
                             >x</button>
                     </span>
                 </div>
-
-
             </div>
             
             <table className="results-table">
