@@ -21,16 +21,17 @@ export default function Home() {
 
         document.getElementById("search-term")!.innerHTML = searchTerm;
 
-        console.log("filtering advocates...");
+        // Filter advocates based on search term
+        let lowerSearchTerm = searchTerm.toLowerCase();
         const filteredAdvocates = advocates.filter((advocate: Advocate) => {
             return (
-                advocate.firstName.includes(searchTerm) ||
-                advocate.lastName.includes(searchTerm) ||
-                advocate.city.includes(searchTerm) ||
-                advocate.degree.includes(searchTerm) ||
-                advocate.specialties.includes(searchTerm) ||
-                advocate.yearsOfExperience.toString().includes(searchTerm)
-                // || advocate.phoneNumber.toString().includes(searchTerm) <--- not matching on phone for now
+                advocate.firstName.toLowerCase().includes(lowerSearchTerm) ||
+                advocate.lastName.toLowerCase().includes(lowerSearchTerm) ||
+                advocate.city.toLowerCase().includes(lowerSearchTerm) ||
+                advocate.degree.toLowerCase().includes(lowerSearchTerm) ||
+                advocate.specialties.some((s) => s.toLowerCase().includes(lowerSearchTerm)) ||
+                advocate.yearsOfExperience.toString().includes(lowerSearchTerm)
+                // || advocate.phoneNumber.toString().includes(lowerSearchTerm) <--- not matching on phone for now
             );
         });
 
